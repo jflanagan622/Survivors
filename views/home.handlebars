@@ -6,10 +6,10 @@
         <a href="#" id="prod3">-</a>
       </div>
       <div class="navigation-center">
-        <img src="../assets/web/images/logo.png" alt="Richwood-scentific">
+        <img src="../assets/web/images/loader_logo_small.png" alt="Richwood-scentific">
       </div>
       <div class="navigation-right">
-        <a href="#"><img src="../assets/web/images/shopping-bag.png" alt=""></a>
+    <div id="cartcount" style="position:relative;left:13px;"></div>    <a href="#"><img src="../assets/web/images/shopping-bag.png" alt=""></a>
         <button class="login-btn" href="#">Login</button>
       </div>
     </div>
@@ -115,6 +115,21 @@ $( document ).ready(function() {
           $('#prod3').text(result.data.product_types[2].label);
       }
   });
+    
+    $.ajax({
+      url: "http://localhost:3000/api/cartcount/",
+      dataType: "json",
+      type: "GET",
+      data: {},
+      success: function (result) {
+          console.log (result);
+          //console.log (data.items[0].sumofquantity);
+          // shopping bag icon
+          //{"result":"success","data":{"items":[{"sumofquantity":"4"}]}}
+          $('#cartcount').text(result.data.items[0].sumofquantity);
+          
+      }
+  });
 
   $.ajax({
         url: "http://localhost:3000/api/products",
@@ -145,6 +160,8 @@ $( document ).ready(function() {
                   // Build a string for the images path and add the file name from the database
                   var imgSrc = "../assets/web/images/products/" + result.data.products[x].product_pic;
                   $(classToFind).find('img').attr('src', imgSrc);
+                    
+                    console.log(imgSrc);
               
                   // Is this a Best Seller? If so, replace the New Product text with Best Seller
                   if(result.data.products[x].best_seller == true) {
@@ -173,9 +190,22 @@ $( document ).ready(function() {
               },
               success: function (result) {
                   console.log(result);
+                  ucart();
               }
           });
     } );
+    
+    
+    
+     $( document ).ready(function() {
+    
+        
+            //alert("hello.")
+    
+     });
+    
+    
+    
     
     function generateUUID() { // Public Domain/MIT
       var d = new Date().getTime();
@@ -189,7 +219,28 @@ $( document ).ready(function() {
       });
     }
     
+    
+    function ucart () {
+        
+        //alert ("hello 2") ;
+        
+            $.ajax({
+              url: "http://localhost:3000/api/cartcount/",
+              dataType: "json",
+              type: "GET",
+              data: {},
+              success: function (result) {
+                  console.log (result);
+                  //console.log (data.items[0].sumofquantity);
+                  // shopping bag icon
+                  //{"result":"success","data":{"items":[{"sumofquantity":"4"}]}}
+                  $('#cartcount').text(result.data.items[0].sumofquantity);
 
+      }
+  });
+    }
 });
+    
+
 
 </script>
