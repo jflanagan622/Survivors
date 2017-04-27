@@ -14,22 +14,46 @@
             <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
             
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
-
+            
         </form><!-- /form -->
 
     </div><!-- /card-container -->
 </div><!-- /container -->
 
+<center>
+    <div>
+        <button>
+<a href="/signup" style="color: black; text-decoration: none">New User Sign Up</a>
+        </button>
+    </div>
+</center>
+
+
+<br />
+
+<center>
+    <div>
+        <button>
+<a href="/" style="color: black; text-decoration: none">Home Page</a>
+        </button>
+    </div>
+</center>
+
+<br />
+
+<center>
+<a href="/admin"><img src="../assets/web/images/infin.png" alt=""style="width:40px;height:40px;"hspace="20"></a>
+</center>
+
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
 <script src="../assets/web/js/js.cookie.js"></script>
-
 <script type="text/javascript">
 
 $( document ).ready(function() {
 
     // Remove any leftovers
-    Cookies.remove('richwood-scentific');
+    Cookies.remove('richwood-scentific-temp');
 
     $("form").submit(function() { 
 
@@ -49,18 +73,25 @@ $( document ).ready(function() {
                 
                 var id_customer = result.data.customer[0].id;
                 Cookies.set('richwood-scentific', id_customer);
-                // TODO: make a cookie or otherwise store local information about the customer
+                // TODO: make a cookie or otherwise store local information 
+                //about the customer
+                console.log(result);
+                
                 window.location.href = "/";
-            },
+            }, // End success
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 // A failure will usually mean an invalid login
                 // TODO: Properly test if it is a 403 (already exists) or something else
+                //alert("Hello! I am an alert box!");
                 window.location.href = "/login";
-            }  
-        });
+            }  //End error
+        }); End ajax call
 
-    });
+    }); //End form
        
-});
+}); // End document.ready
+    
+    
 
 </script>
+

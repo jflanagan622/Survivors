@@ -1,18 +1,29 @@
     <!-- Navigation -->
     <div class="navigation">
       <div class="navigation-left">
-        <a href="#" id="prod1">-</a>
-        <a href="#" id="prod2">-</a>
-        <a href="#" id="prod3">-</a>
-      </div>
+          
+          
+          <form method="get" action="/shop">
+        <button class="login-btn">Shop Products</button>
+          </form>
+        
+       <!-- there was 3 prod# code line 120 <a href="#" id="prod3"></a>-->
+      </div> <!--End class "navigation-left"-->
       <div class="navigation-center">
-        <img src="../assets/web/images/loader_logo_small.png" alt="Richwood-scentific">
-      </div>
+        <img src="../assets/web/images/logo.png" alt="Richwood-scentific">
+      </div> <!--End class "navigation-center"-->
       <div class="navigation-right">
-    <div id="cartcount" style="position:relative;left:13px;"></div>    <a href="#"><img src="../assets/web/images/shopping-bag.png" alt=""></a>
-        <button class="login-btn" href="#">Login</button>
-      </div>
-    </div>
+        <a href="/cart" + result.data.id_customer><img src="../assets/web/images/shopping-bag.png" alt=""></a> 
+        
+        <form method="get" action="/login">
+        <button class="login-btn">Login</button>
+          </form>
+          
+          
+          <a href="/admin"><img src="../assets/web/images/infin.png" alt=""style="width:40px;height:40px;"hspace="20"></a>
+                                                                                                
+      </div> <!--End class "navigation-right"-->
+    </div> <!--End class "navigation"-->
 
     <!-- Slider Wrapper -->
     <div class="css-slider-wrapper">
@@ -92,44 +103,30 @@ $( document ).ready(function() {
 
   var id_customer = Cookies.get('richwood-scentific');
 
-  if(id_customer) {
+  if(id_customer /*|| or sign up customer*/) {
     // Logged in, cookie already exists
+     Cookies.set('richwood-scentific', id_customer);
     console.log("using customer id: " + id_customer);
-  } else {
-    // Not logged in, create temp uuid and make a cookie
-    var id_customer = generateUUID();
-    Cookies.set('richwood-scentific', id_customer);
-    console.log("generated a temp id: " + id_customer);
-  }
+  } /* End if*/ else {// if we are not, make us a logged in customer
+   // Register customer, create uuid, and make a cookie
+   var id_customer = generateUUID();
+    Cookies.set('richwood-scentific-temp', id_customer);
+    console.log("registered new user, " + id_customer);
+  } // End else
 
 
-  $.ajax({
-      url: "http://localhost:3000/api/product_types",
-      dataType: "json",
-      type: "GET",
-      data: {},
-      success: function (result) {
-          // Menu bar
-          $('#prod1').text(result.data.product_types[0].label);
-          $('#prod2').text(result.data.product_types[1].label);
-          $('#prod3').text(result.data.product_types[2].label);
-      }
-  });
-    
-    $.ajax({
-      url: "http://localhost:3000/api/cartcount/",
-      dataType: "json",
-      type: "GET",
-      data: {},
-      success: function (result) {
-          console.log (result);
-          //console.log (data.items[0].sumofquantity);
-          // shopping bag icon
-          //{"result":"success","data":{"items":[{"sumofquantity":"4"}]}}
-          $('#cartcount').text(result.data.items[0].sumofquantity);
-          
-      }
-  });
+//  $.ajax({
+//      url: "http://localhost:3000/api/product_types",
+//      dataType: "json",
+//      type: "GET",
+//      data: {},
+//      success: function (result) {
+//          // Menu bar
+//          $('#prod1').text(result.data.product_types[0].label);
+//          $('#prod2').text(result.data.product_types[1].label);
+//          $('#prod3').text(result.data.product_types[2].label);
+//      }
+//  });
 
   $.ajax({
         url: "http://localhost:3000/api/products",
@@ -155,27 +152,25 @@ $( document ).ready(function() {
                   $(classToFind).find('button').html(result.data.products[x].unit_price);
 
                   // So we can call add to cart with the product id later
-                  $(classToFind).find('button').attr('id', result.data.products[x].id);
+                  $(classToFind).find('button').attr('id_product', result.data.products[x].id);
 
                   // Build a string for the images path and add the file name from the database
                   var imgSrc = "../assets/web/images/products/" + result.data.products[x].product_pic;
                   $(classToFind).find('img').attr('src', imgSrc);
-                    
-                    console.log(imgSrc);
               
                   // Is this a Best Seller? If so, replace the New Product text with Best Seller
                   if(result.data.products[x].best_seller == true) {
                     $(classToFind).find('h4').html('Best Seller');
-                  }
+                  } // End best seller
               
                 } // End if x < 4
               
               } // End for loop
             
-            } // End did we get any records
+            } // End did we get any products
 
         } // End success function
-    });
+    }); // End Ajax call.
 
     $('.slider').on( 'click', 'button', function () {
         //alert ($(this).closest("div").attr("class"));
@@ -186,61 +181,29 @@ $( document ).ready(function() {
               data: {
                 id_customer: id_customer,
                 quantity: '1',
-                id_product: $(this).attr("id")
-              },
+                id_product: $(this).attr("id_product"),
+                  id: $(this).attr("id")
+              }, // End data
               success: function (result) {
                   console.log(result);
-                  ucart();
-              }
-          });
-    } );
-    
-    
-    
-     $( document ).ready(function() {
-    
+              } // End success
+            
+          }); // End ajax call
         
-            //alert("hello.")
-    
-     });
-    
-    
-    
+    }); // End slider.on('click')
     
     function generateUUID() { // Public Domain/MIT
       var d = new Date().getTime();
       if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
           d += performance.now(); //use high-precision timer if available
-      }
+      } // End if
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
           var r = (d + Math.random() * 16) % 16 | 0;
           d = Math.floor(d / 16);
           return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-    }
-    
-    
-    function ucart () {
+      }); // End return
         
-        //alert ("hello 2") ;
-        
-            $.ajax({
-              url: "http://localhost:3000/api/cartcount/",
-              dataType: "json",
-              type: "GET",
-              data: {},
-              success: function (result) {
-                  console.log (result);
-                  //console.log (data.items[0].sumofquantity);
-                  // shopping bag icon
-                  //{"result":"success","data":{"items":[{"sumofquantity":"4"}]}}
-                  $('#cartcount').text(result.data.items[0].sumofquantity);
-
-      }
-  });
-    }
-});
+    } // End generateUUID
     
-
-
+}); // End document.ready
 </script>
