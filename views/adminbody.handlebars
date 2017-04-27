@@ -16,19 +16,19 @@
             <button class="nav-toggler nav-toggler-md sidebar-toggler" type="button" data-toggle="collapse" data-target="#nav-toggleable-md">
               <span class="sr-only">Toggle nav</span>
             </button>
-            <a class="sidebar-brand img-responsive" href="admin">
+            <!--<a class="sidebar-brand img-responsive" href="admin">
               <span class="icon icon-leaf sidebar-brand-icon"></span>
-            </a>
+            </a>-->
           </div>
 
           <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
            
            <!-- Search for products -->
-           <form class="sidebar-form" method="GET" id="search-form">
+          <!-- <form class="sidebar-form" method="GET" id="search-form">
               <div id="scrollable-dropdown-menu">
                 <input class="typeahead form-control" type="text" placeholder="search">
               </div>
-           </form> 
+           </form> -->
            <script>
                 $('#scrollable-dropdown-menu .typeahead').typeahead({
                   highlight: true,
@@ -53,20 +53,49 @@
             <!-- Side Nav Bar Top -->
             <ul class="nav nav-pills nav-stacked flex-column">
               <li class="nav-header">Main Data Tables</li>
-              <li class="nav-item">
-                <a class="nav-link active" href="admin">Overview</a>
+              
+                <li class="nav-item">
+                <a class="nav-link " href="shop">Shop Products</a>
+              </li>
+                
+                <li class="nav-item">
+                <a class="nav-link active" href="adminbody">Admin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="addproduct">Add Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link "href="admin">Add Customers</a>
+                <a class="nav-link "href="addproducttype">Add Product Type</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="addscenttype">Add Scent Type</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="cart">View Cart</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="checkout">Checkout</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="/">Home Page</a>
+              
+                <li class="nav-item">
+                <a class="nav-link "href="login">Login</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="signup">Signup</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="updateproduct">Update Product</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="viewdata">View Data</a>
               </li>
             </ul>
             
-            <hr class="visible-xs mt-3">
+            <!--<hr class="visible-xs mt-3">
 
-            <!-- Side Nav Bar Bottom -->
+            <!-- Side Nav Bar Bottom 
             <ul class="nav nav-pills nav-stacked flex-column">
               <li class="nav-header">Related Tables</li>
 
@@ -76,7 +105,7 @@
               <li class="nav-item">
                 <a class="nav-link "href="addscenttype">Scent Types</a>
               </li>
-            </ul>
+            </ul>-->
 
           </div>
         </nav>
@@ -88,15 +117,24 @@
         <div class="dashhead">
         <div class="dashhead-titles">
           <h6 class="dashhead-subtitle">Richwood Scent-ific</h6>
-          <h2 class="dashhead-title">Overview</h2>
+          <h2 class="dashhead-title">Admin</h2>
         </div>
 
+            
+            
         <div class="btn-toolbar dashhead-toolbar">
           <div class="btn-toolbar-item input-with-icon">
-            <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">
-            <span class="icon icon-calendar"></span>
+            <!--<input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">-->
+              <p id="demo"></p>
+            <!--<span class="icon icon-calendar"></span>-->
           </div>
         </div>
+            
+            
+            <script>
+                var d = new Date();
+                document.getElementById("demo").innerHTML = d.toDateString();
+            </script>
 
   </div>
 
