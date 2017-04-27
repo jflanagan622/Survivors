@@ -41,10 +41,10 @@ app.listen(app.get('port'), function(){
 app.get('/', function(req,res) {
 	res.render('home');
 });
-app.get('/pretty', function(req,res) {
+//app.get('/pretty', function(req,res) {
 	// Send the construction page
-	res.render('homepretty');
-});
+	//res.render('homepretty');
+//});
 
 // Construction
 app.get('/construction', function(req,res) {
@@ -64,11 +64,31 @@ app.get("/login", function (req, res) {
 	res.render('login');
 });
 
+// Cart Page
+app.get("/cart", function (req, res) {
+	res.render('cart', {layout: 'adminmain'});
+});
+
+// Cart Page
+app.get("/shop", function (req, res) {
+	res.render('shop', {layout: 'adminmain'});
+});
 
 // Checkout Page
 app.get("/checkout", function (req, res) {
 	res.render('checkout');
 });
+
+// updateproduct Page
+app.get("/updateproduct", function (req, res) {
+	res.render('updateproduct', {layout: 'adminmain'});
+});
+
+// viewdata
+app.get("/viewdata", function (req, res) {
+	res.render('viewdata', {layout: 'adminmain'});
+});
+
 
 //-----------------------------------------
 // Dashboard and Admin pages
