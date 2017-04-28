@@ -13,7 +13,7 @@
            <a class="sidebar-brand img-responsive" href="/admin">
               <span class="icon icon-leaf sidebar-brand-icon"></span>
             </a>
-          </div> <!--End class "sidebar-header"--> 
+          </div>
 
           <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
            
@@ -64,10 +64,10 @@
               </li>
             </ul>-->
 
-          </div> <!--End class "collapse nav-toggleable-md"--> 
+          </div>
 
-        </nav> <!--End class "side-bar nav"--> 
-      </div> <!--End class "col-md-3 sidebar"--> 
+        </nav>
+      </div>
 
         <!-- Top page Bar -->
         <div class="col-md-9 content">
@@ -76,7 +76,7 @@
                     <h6 class="dashhead-subtitle">Richwood Scent-ific</h6>
                     <h2 class="dashhead-title">Shop Products</h2>
                 </div>
-            </div> <!--End class "dashhead"--> 
+            </div>
 
             <!-- Body Box -->
             <div class="col-md-9 content">
@@ -86,10 +86,11 @@
             </div>
             <!-- Body Box -->
 
-        </div> <!--End class "col-md-9 content"--> 
+        </div>
         
-      </div> <!--End class "Row"--> 
-    </div> <!--End class "container"--> 
+      </div>
+    </div>
+  </div>
 
 
 <script src="../assets/js/jquery.min.js"></script>
@@ -123,12 +124,12 @@
                       // We don't want id visible
                       if(key == 'id' || key == 'id_type' || key == 'cost' || key == 'product_pic' || key == 'date_created' || key == 'qty_on_hand' || key == 'date_updated' || key == 'id_scent_type') {
                         columns.push( { "title" : key, "data" : key, "visible": false } );
-                      } /* End if*/ else { 
+                      } else { 
                         // Push in the data
                         columns.push( { "title" : key, "data" : key } );
-                      } // End else
-                    } // End for loop
-                } // End if result.data.products.length > 0
+                      }
+                    }
+                }
                 // Push in our buttons as a final column
                columns.push( {"defaultContent": "<button class=\"btn btn-default\"><i class=\"fa fa-arrow-up\"></i></button><button class=\"btn btn-delete\"><i class=\"fa fa-arrow-down\"></i></button>"} )
 
@@ -138,9 +139,9 @@
                     "columns" : columns,
                     columnDefs: [
                       { width: '500px', targets: 0 }
-                    ], // End columnDefs
+                    ],
                     fixedColumns: true
-                });  // End var table
+                } );  
  
                 $('#data_table tbody').on( 'click', 'button', function () {
                     var data = table.row( $(this).parents('tr') ).data();
@@ -148,15 +149,15 @@
                     if(buttonClass == "btn btn-default") {
                       // How would you hook this up?
                       alert( "Update " + data.id );
-                    }/* End if*/ else {
+                    } else {
                       // And this? What about the "are you sure?"
                       alert( "Delete " + data.id );
-                    } // End Else
+                    }
                     
-                }); // End data_table tbody.on('click')
+                } );
 
             } // End success
         }); // End ajax
 
-    }); // End document.ready
+    } );
 </script>

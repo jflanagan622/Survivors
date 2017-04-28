@@ -73,7 +73,7 @@
         <div class="col-md-9 content">
             <div class="dashhead">
                 <div class="dashhead-titles">
-                    <h6 class="dashhead-subtitle">Richwood Scent-ific</h6>
+                    <h6 class="dashhead-subtitle">Richwood-Scentific</h6>
                     <h2 class="dashhead-title">Cart</h2>
                 </div>
             </div> <!-- End class "dashhead" -->
@@ -96,21 +96,18 @@
 <script src="../assets/web/js/js.cookie.js"></script>
 <script type="text/javascript">
     
-    var id_customer = Cookies.get('richwood-scentific');
+   
     // "DT_RowId" will be used for row id
     $(document).ready(function() {
 
-        // Inside the ready function, lets call to fill the product types select menu
+         var id_customer = Cookies.get('richwood-scentific' || 'richwood-scentific-temp');
+        // 4-28-17 after testing a hardcoded id_customer from the cart table with nothin in the data: curly brackets on line 109 we found that we could render a complet correct cart page "job done" but just for that customer record. still progress!! we then found that we could us the code as is on line 106 and this would work to pull the id_customer from our cookies on line 103 and look for that id_customer in cart table however we still have an issue as there is no checking if said customer ever put an item in the cart, we need to account for this but not a show stopper by simply clicking on a few "buys" on the home page befor going to cart page we ensure we have an id_customer with items in the cart table. also we are now having to try diffrent itterations of what to put in the data: curly brackets on line 109 to try to build the data like it did when it was hard coded and we have tired A LOT of itteration twice but still great job on the progress everyone -Brent
         $.ajax({
-            url: "http://localhost:3000/api/cart/",
+            url: "http://localhost:3000/api/cart/{{id}}", 
             dataType: "json",            
             type: "GET",
-            data: {
-                id_customer: id_customer,
-               quantity: '1',
-                id_product: $(this).attr("id")
-              },
-           
+            data: {id_customer : id_customer},
+         
             success: function (result) {
     
                 // vars for DataTable
@@ -133,8 +130,10 @@
                         // Push in the data
                         columns.push( { "title" : key, "data" : key } );
                       } // End else
-                    } // End for loop
-                } // End if loop
+                    }; // End for loop
+                   // else {
+                   // console.log("does not 42");} //end else loop 
+                //}; // End if loop
                 console.log(result.data.items);
                 // Push in our buttons as a final column
                 columns.push( {"defaultContent": "<button class=\"btn btn-default\"><i class=\"fa fa-arrow-up\"></i></button><button class=\"btn btn-delete\"><i class=\"fa fa-arrow-up\"></i></button>"} )
@@ -161,7 +160,7 @@
                     } // End else
                     
                 }); // End data_table.on('click')
-
+                    }
             } // End success
             
         }); // End ajax

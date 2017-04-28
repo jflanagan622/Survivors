@@ -30,7 +30,7 @@
     </div>
 </center>
 
-<br />
+<br></br>
 
 <center>
     <div>
@@ -40,15 +40,19 @@
     </div>
 </center>
 
-<br />
+<br></br>
 
 <center>
-<a href="/admin"><img src="../assets/web/images/infin.png" alt=""style="width:40px;height:40px;"hspace="20"></a>
+<a href="/admin"><img src="../assets/web/images/infin.png" alt=""style="width:40px;height:40px;"hspace="20">
+              </img>
+          </a>
 </center>
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+
 <script src="../assets/web/js/js.cookie.js"></script>
+
 <script type="text/javascript">
 
 $( document ).ready(function() {
@@ -78,23 +82,25 @@ $( document ).ready(function() {
                 // TODO: make a cookie or otherwise store local information about the customer
                 
             
-        var id_customer = Cookies.get('richwood-scentific');
+   var id_customer = Cookies.get('richwood-scentific');
 
-            if(id_customer ) { // Logged in, cookie already exists
-                Cookies.set('richwood-scentific', id_customer);
-                console.log("using customer id: " + id_customer);
-            } //End if
-            window.location.href = "/";
-            }, //End success
+  if(id_customer ) {
+    // Logged in, cookie already exists
+     Cookies.set('richwood-scentific', id_customer);
+    console.log("using customer id: " + id_customer);
+  }
+
+                window.location.href = "/";
+            },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 // A failure will usually mean an account with this email already exists
                 // TODO: Properly test if it is a 403 (already exists) or something else
-            window.location.href = "/login";
-            }  // End error function
-        }); // End ajax
+                window.location.href = "/login";
+            }  // end error function
+        }); // end ajax
 
-    }); // End form
+    }); // end form
        
-}); // End document.ready 
+}); // end document.ready 
 
 </script>
