@@ -10,19 +10,22 @@
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
 		registeredInModuleLoader = true;
-	}
+	} // End if (typeof define === 'function' && define.amd)
+	
 	if (typeof exports === 'object') {
 		module.exports = factory();
 		registeredInModuleLoader = true;
-	}
+	} // End if (typeof exports === 'object')
+	
 	if (!registeredInModuleLoader) {
 		var OldCookies = window.Cookies;
 		var api = window.Cookies = factory();
 		api.noConflict = function () {
 			window.Cookies = OldCookies;
 			return api;
-		};
-	}
+		}; // End api.noConflict
+	} // End if (!registeredInModuleLoader)
+	
 }(function () {
 	function extend () {
 		var i = 0;
@@ -31,17 +34,17 @@
 			var attributes = arguments[ i ];
 			for (var key in attributes) {
 				result[key] = attributes[key];
-			}
-		}
+			} // End for (var key in attributes)
+		} //End for (; i < arguments.length; i++)
 		return result;
-	}
+	} // End function extend
 
 	function init (converter) {
 		function api (key, value, attributes) {
 			var result;
 			if (typeof document === 'undefined') {
 				return;
-			}
+			} 
 
 			// Write
 
@@ -54,7 +57,7 @@
 					var expires = new Date();
 					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
 					attributes.expires = expires;
-				}
+				} 
 
 				// We're using "expires" because "max-age" is not supported by IE
 				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
@@ -88,9 +91,9 @@
 						continue;
 					}
 					stringifiedAttributes += '=' + attributes[attributeName];
-				}
+				} // end for var attributename loop
 				return (document.cookie = key + '=' + value + stringifiedAttributes);
-			}
+			} // end if (arguments.length > 1)
 
 			// Read
 
@@ -123,21 +126,21 @@
 						try {
 							cookie = JSON.parse(cookie);
 						} catch (e) {}
-					}
+					} // End if (this.json)
 
 					if (key === name) {
 						result = cookie;
 						break;
-					}
+					} // End if (key === name)
 
 					if (!key) {
 						result[name] = cookie;
 					}
-				} catch (e) {}
-			}
+				} /* End try */ catch (e) {}
+			} // End for (; i < cookies.length; i++)
 
 			return result;
-		}
+		} // End function api (key, value, attributes)
 
 		api.set = api;
 		api.get = function (key) {
@@ -147,19 +150,19 @@
 			return api.apply({
 				json: true
 			}, [].slice.call(arguments));
-		};
+		}; // End api.getJSON
 		api.defaults = {};
 
 		api.remove = function (key, attributes) {
 			api(key, '', extend(attributes, {
 				expires: -1
 			}));
-		};
+		}; // End api.remove
 
 		api.withConverter = init;
 
 		return api;
-	}
+	} // End function init (converter)
 
 	return init(function () {});
-}));
+})); // End (function ()

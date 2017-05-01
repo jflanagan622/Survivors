@@ -24,7 +24,7 @@ exports.addCart = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-	    };
+	    }; // End handleError
 	    // handle an error from the connect
 		if(handleError(err)) return;
 
@@ -54,11 +54,11 @@ exports.addCart = function(req, res) {
 							save_query_text = "UPDATE cart SET quantity = $1, date_updated = $2 WHERE id = $3 returning id, quantity;"
 							bind_array = [use_quantity, dateutil.date(), quantity_result.rows[0].id];
 							//console.log("Found an item already with quantity of " + quantity_result.rows[0].quantity + " setting quantity to " + use_quantity);
-						} else {
+						} /* End if quantity rowCount */ else {
 							save_query_text = 'INSERT INTO cart (id, date_created, date_updated, id_product, id_customer, quantity) VALUES ($1, $2, $3, $4, $5, $6) returning id, quantity;'
 							bind_array = [uuid.v4(), dateutil.date(), dateutil.date(), req.body.id_product, req.body.id_customer, use_quantity];
 							//console.log("Did not find a matching item. Setting quantity to " + use_quantity);
-						}
+						} // End else
 
 						client.query(save_query_text, bind_array, function(err, result) {
 							done();
@@ -66,24 +66,24 @@ exports.addCart = function(req, res) {
 							if(handleError(err)) return;
 							var totalForThisAddition = parseInt(req.body.quantity) * product_result.rows[0].unit_price;
 							res.status(200).json({result: 'success', data:{ id : result.rows[0].id, quantity: result.rows[0].quantity, unit_price: product_result.rows[0].unit_price, total: totalForThisAddition }});	
-						});
+						}); // End client.query(save_query_text)
 
-					});
+					}); // End client.query with quantity_result
 
-				} else {
+				} /* End if product rowCount */ else {
 					done();
 					res.status(200).json({result: 'success', data:{ id : 0, unit_price: 0, total: 0 }});	
-				}
-			});
+				} // End else loop
+			}); // End first client.query
 
-		} else {
+		} /*end validate if loop */ else {
 			done();
 	    	res.status(400).json({ result: 'error', data:{error: 'id of the product and id of the customer are required'} });
-		}
+		} // End else
 		
-	});
+	}); // End pool.connect
 	
-}
+} // End exports.addcart
 
 
 //-------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ exports.readCart = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	};
+    	}; // End handleError
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -112,12 +112,12 @@ exports.readCart = function(req, res) {
 			if(result.rowCount > 0) {
 				var items = result.rows;
 				res.status(200).json({result: 'success', data:{ items : items }});
-			} else {
+			} /* End if rowCount */ else {
 				res.status(200).json({result: 'success', data:{}});
-			}
-		});
-	});
-};
+			} // End else loop
+		}); // End client.query
+	}); // End pool.connect
+}; // End exports.readCart
 
 
 //---------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ exports.updateCart = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	};
+    	}; // End handleError
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -151,7 +151,7 @@ exports.updateCart = function(req, res) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', quantity = $' + argumentCount; 
 						valueArray.push(req.body.quantity);
-					}
+					} // End If loop
 
 					queryText = queryText + ' WHERE id = $1 RETURNING id;';
 					
@@ -161,23 +161,23 @@ exports.updateCart = function(req, res) {
 						done();
 						if(result.rowCount > 0) {
 							res.status(200).json({result: 'success', data:{ id : result.rows[0].id }});
-						} else {
+						} /* End if rowCount */ else {
 							res.status(400).json({ error: 'id not found' });	
-						}
-	      		});
+						} // End else loop
+	      		}); // End client.query
       		
-      		} else {
+      		} /* End if(req.body.id)*/ else {
 	      		done();
 	      		res.status(400).json({ result:'error', data:{ error:'the cart line id is required inside the body object'} });
-    		}
+    		} // End else loop
       	
-    	} else {
+    	} /* End If(req.body)*/ else {
 	    	done();
 	    	res.status(400).json({ result:'error', data:{ error:'Missing body object' } });
-    	}
+    	} // End else loop
    
-  	});
-};
+  	}); // End pool.connect
+}; // End exports.updateCart
 
 //---------------------------------------------------------------------------------------
 // Delete
@@ -192,7 +192,7 @@ exports.deleteCartLine = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	};
+    	}; // End handleError
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -206,17 +206,12 @@ exports.deleteCartLine = function(req, res) {
 				if(handleError(err)) return;
 				done();
 				res.status(200).json({result: 'success', data:{count : result.rowCount}});
-      		});
+      		}); // End client.query
       	
-    	} else {
+    	} /* End if validate */ else {
 	    	done();
 	    	res.status(400).json({ result: 'error', data:{error: 'id is required'} });
-    	}
+    	} // End else loop.
    
-  	});
-};
-
-
-
-
-
+  	}); // End pool.connect
+}; // End exports.deleteCartLine

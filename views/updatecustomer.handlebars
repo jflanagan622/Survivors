@@ -1,0 +1,319 @@
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3 sidebar">
+        <nav class="sidebar-nav">
+
+          <div class="sidebar-header">
+            <button class="nav-toggler nav-toggler-md sidebar-toggler" type="button" data-toggle="collapse" data-target="#nav-toggleable-md">
+              <span class="sr-only">Toggle nav</span>
+            </button>
+            <a class="sidebar-brand img-responsive" href="/admin">
+              <span class="icon icon-leaf sidebar-brand-icon"></span>
+            </a>
+          </div>
+
+          <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
+           
+           <!-- Search for products -->
+           <form class="sidebar-form">
+              <input class="form-control" type="text" placeholder="Search...">
+              <button type="submit" class="btn-link">
+                <span class="icon icon-magnifying-glass"></span>
+              </button>
+            </form>
+
+            <!-- Side Nav Bar Top -->
+            <ul class="nav nav-pills nav-stacked flex-column">
+              <li class="nav-header">Main Data Tables</li>
+              
+                <li class="nav-item">
+                <a class="nav-link " href="shop">Shop Products</a>
+              </li>
+                
+                <li class="nav-item">
+                <a class="nav-link " href="admin">Admin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="addproduct">Add Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "href="addproducttype">Add Product Type</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="addscenttype">Add Scent Type</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="cart">View Cart</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="checkout">Checkout</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="/">Home Page</a>
+              
+                <li class="nav-item">
+                <a class="nav-link "href="login">Login</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="signup">Signup</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link active"href="updateproduct">Update Product</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="viewdata">View Data</a>
+              </li>
+            </ul>
+            
+            <!--<hr class="visible-xs mt-3">
+
+            <!-- Side Nav Bar Bottom 
+            <ul class="nav nav-pills nav-stacked flex-column">
+              <li class="nav-header">Related Tables</li>
+
+              <li class="nav-item">
+                <a class="nav-link " href="/addproducttype">Product Types</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "href="/addscenttype">Scent Types</a>
+              </li>
+            </ul>-->
+
+          </div>
+
+        </nav>
+      </div>
+
+
+        <!-- Top page Bar -->
+        <div class="col-md-9 content">
+            <div class="dashhead">
+                <div class="dashhead-titles">
+                    <h6 class="dashhead-subtitle">Richwood Scent-ific</h6>
+                    <h2 class="dashhead-title">Update a Product</h2>
+                </div>
+            </div>
+
+            <!-- Body Box -->
+            <hr class="mt-5">
+                
+            <form action="http://localhost:3000/api/product" method="PUT" id="form">
+                <div class="form-group">
+                    <label for="inputProductName">Product Name</label>
+                    <input type="text" class="form-control" id="inputProductName" name="product_name" placeholder="Enter product name">
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                      <label for="inputSize">Product Size or Count</label>
+                      <input type="text" class="form-control" id="inputSize" name="size" placeholder="Enter size or count">
+                    </div>
+                    <div class="col-4">
+                      <label for="inputType">Product Type</label>
+                        <select class="custom-select" id="productTypes" name="id_type">
+                          <option selected>Open this select menu</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                      <label for="inputType">Scent Type</label>
+                        <select class="custom-select" id="scentTypes" name="id_scent_type">
+                          <option selected>Open this select menu</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label for="inputUnitPrice">Unit Price</label>
+                        <!-- Note a numeric validator field will only want whole numbers unless we set the step property to "any" -->
+                        <input class="form-control" type="number" step="any" id="inputUnitPrice" name="unit_price" placeholder="Enter unit price">
+                    </div>
+                    <div class="col-3">
+                        <label for="inputCost">Unit Cost</label>
+                        <!-- Note a numeric validator field will only want whole numbers unless we set the step property to "any" -->
+                        <input class="form-control" type="number" step="any" id="inputCost" name="cost" placeholder="Enter unit cost">
+                    </div>
+                    <div class="col-3">
+                        <label for="qtyOnHand">Qty on Hand</label>
+                        <!-- Note a numeric validator field will only want whole numbers unless we set the step property to "any" -->
+                        <input class="form-control" type="number" step="any" id="qtyOnHand" name="qty_on_hand" placeholder="Enter qty">
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="inStore" name="in_store">
+                        In-Store Pickup
+                    </label>
+                </div>
+                <button type="submit" name="submitButton" value="save" class="btn btn-primary">save</button>
+            
+                <input type="hidden" id="productId" name="product_id">
+
+            </form>
+
+            <hr class="mt-5">
+            <!-- Body Box -->
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/sweetalert.min.js"></script> 
+
+  <script type="text/javascript">
+
+    $( document ).ready(function() {
+
+        // Hmm- this may seem strange that what looks like a variable is being placed
+        // inside quotes- BUT this is because it's being replaced on the server- stamped in
+        // before it gets sent to the browser which has no idea who "id" is. Hope that makes sense
+        console.log("{{id}}");
+
+        // Inside the ready function, lets call to fill the product types select menu
+        // Product Types
+        $.ajax({
+            url: "http://localhost:3000/api/product_types",
+            dataType: "json",
+            type: "GET",
+            data: {},
+            success: function (result) {
+                // We iterate through the array of records we get back from the database API call
+                // If you drill down in the console, you will find the array at result.data.product_types
+                $.each(result.data.product_types, function (index, product_type) {
+                    $('#productTypes').append('<option value=' + product_type.id + '>' + product_type.label + '</option>');
+                })
+            }
+        });
+        // Scent Types
+        $.ajax({
+            url: "http://localhost:3000/api/scent_types",
+            dataType: "json",
+            type: "GET",
+            data: {},
+            success: function (result) {
+                // We iterate through the array of records we get back from the database API call
+                // If you drill down in the console, you will find the array at result.data.scent_types
+                $.each(result.data.scent_types, function (index, scent_type) {
+                    $('#scentTypes').append('<option value=' + scent_type.id + '>' + scent_type.label + '</option>');
+                })
+            }
+        });
+
+        // Did we get a product to search for on opening?
+
+        // Get product with search
+        $.ajax({
+            url: "http://localhost:3000/api/product/{{id}}",
+            dataType: "json",
+            type: "GET",
+            data: {},
+            success: function (result) {
+                // We iterate through the array of records we get back from the database API call
+                // If you drill down in the console, you will find the array at result.data.product_types
+                $('#productId').val(result.data.products[0].id);
+                
+                $('#inputProductName').val(result.data.products[0].product_name);
+                $('#inputSize').val(result.data.products[0].size);
+
+                // Note how do we set select menus. Remember the difference between value and label
+                if(result.data.products[0].id_type) {
+                  $('#productTypes').val(result.data.products[0].id_type);
+                }
+                if(result.data.products[0].id_scent_type) {
+                  $('#scentTypes').val(result.data.products[0].id_scent_type);
+                }
+                
+                // $ make the numeric validators unhappy- so...
+                var unitPrice = result.data.products[0].unit_price.replace('$', '');
+                var cost = result.data.products[0].cost.replace('$', '');
+                $('#inputUnitPrice').val(unitPrice);
+                $('#inputCost').val(cost);
+                $('#qtyOnHand').val(result.data.products[0].qty_on_hand);
+                
+                // Checkbox is unique too
+                $("#inStore").prop('checked', result.data.products[0].in_store);
+            }
+        });
+
+        // Process the form
+        $('form').submit(function(event) {
+
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+
+            // get the form data
+            // there are many ways to get this data using jQuery (you can use the class or id also)
+            var formData = {
+                'id'            : $('input:hidden[name=product_id]').val(),
+                'product_name'  : $('input[name=product_name]').val(),
+                'size'          : $('input[name=size]').val(),
+                'id_type'       : $("#productTypes").val(),
+                'id_scent_type' : $("#scentTypes").val(),
+                'unit_price'    : $('input[name=unit_price]').val(),
+                'cost'          : $('input[name=cost]').val(),
+                'qty_on_hand'   : $('input[name=qty_on_hand]').val(),
+                'in_store'      : $('input[name=in_store]').is(':checked')
+            };
+
+            // process the form
+            $.ajax({
+                type        : 'PUT', // define the type of HTTP verb we want to use (POST for our form)
+                url         : 'http://localhost:3000/api/product', // the url where we want to POST
+                data        : formData, // our data object
+                dataType    : 'json', // what type of data do we expect back from the server
+                encode      : true
+            })
+                // using the done promise callback
+                .done(function(data) {
+                    // Show success alert
+                    swal({   
+                      title: "Success!",   
+                      text: data.data.product_name + " was updated.",   
+                      type: "success"   
+                    }, function(isConfirm) {   
+                      if (isConfirm) {     
+                        window.location.href="/admin";  
+                      } 
+                    })
+                })
+                .fail(function(data){
+                    // In a fail, we need to look inside the responseJSON object for our
+                    // APIs error message
+                    swal({   
+                      title: "Oops...",   
+                      text: data.responseJSON.data.error,   
+                      type: "error"   
+                    }, function(isConfirm) {   
+                      if (isConfirm) {     
+                        window.location.href="/admin";  
+                      } 
+                    })
+                });
+                
+        });
+
+    });
+
+    // Function to examine any URL Query String parameters 
+    var urlParams;
+    (window.onpopstate = function () {
+        var match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query  = window.location.search.substring(1);
+
+        urlParams = {};
+        while (match = search.exec(query))
+          urlParams[decode(match[1])] = decode(match[2]);
+    })();
+
+  </script>
+

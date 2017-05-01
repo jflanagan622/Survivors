@@ -1,4 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<script src="../assets/web/js/delete-button.js"></script>
+<script src="../assets/web/css/bootstrap.min.css"></script>
+<script src="../assets/web/css/custom.css"></script>-->
 
 <div class="container">
     <div class="row">
@@ -93,7 +96,6 @@
 <script src="../assets/web/js/js.cookie.js"></script>
 <script type="text/javascript">
     
-   
     // "DT_RowId" will be used for row id
     $(document).ready(function() {
         
@@ -121,7 +123,7 @@
                   
                     for(var key in firstRecord) {
                       // We don't want id visible
-                      if(key == 'id' ) {
+                      if(key == 'id' || key == 'date_created' || key == 'id_customer' || key == 'date_updated') {
                         columns.push( { "title" : key, "data" : key, "visible": false } );
                       }/*End if*/ else { 
                         // Push in the data
@@ -133,7 +135,7 @@
                 //}; // End if loop
                 console.log(result.data.items);
                 // Push in our buttons as a final column
-                columns.push( {"defaultContent": "<button class=\"btn btn-default\"><i class=\"fa fa-arrow-up\"></i></button><button class=\"btn btn-delete\"><i class=\"fa fa-arrow-up\"></i></button>"} )
+                columns.push( {"defaultContent": "<button class=\"btn btn-default\"><i class=\"fa fa-arrow-up\"></i></button><button class=\"btn btn-delete\"><i class=\"fa fa-arrow-down\"></i></button>"} )
                 // Draw the table
                 var table = $('#data_table').DataTable( {
                     "data" : result.data.items,
@@ -156,41 +158,66 @@
                     } // End else
                     
                 }); // End data_table.on('click')
-                    }
+                    } // End if(result.data.items.length > 0)
             } // End success
             
         }); // End ajax
     }); //End document.ready
 </script>
+
 <script type="text/javascript">
-            //delete button
-        var answer = confirm ("Are you sure you want to remove this from your cart?");
+            //update button
+        var answer = confirm ("Are you sure you want to update quantity of this product?");
             if (answer) {
                     $('#btn-default').on( 'click', 'button', function () {
                         $.ajax({
-                                type        : 'DELETE', // define the type of HTTP verb we want to use (DELETE our cart)
-                                url         : 'http://localhost:3000/api/cart:id', // the url where we want to DELETE
+                                type        : 'PUT', // define the type of HTTP verb we want to use (PUT item to our cart)
+                                url         : 'http://localhost:3000/api/cart', // the url where we want to PUT
                                 data        : {}, // our data object
                                 dataType    : 'json', // what type of data do we expect back from the server
                                 encode      : true
                                 success: function (result) {
+                                                            // using the done promise callback
+                                .done(function(data) {
+                                $('#btn-default').remove();
+                                swal("Success, your item's quantity has been updated", "success");
+                                }), // End .done
+                                .fail(function(data){
+                                swal("Oops...", data.responseJSON.data.error, "error");
+                                }) // End .fail
 
-                                                                        })
-                                // using the done promise callback
+                            }; // End success
+                    }); // End Ajax call
+                }); // End btn-default.onclick
+            } // end if (answer)
+</script>
+<script type="text/javascript">
+            //update button
+        var answer = confirm ("Are you sure you want to update quantity of this product?");
+            if (answer) {
+                    $('#btn-delete').on( 'click', 'button', function () {
+                        $.ajax({
+                                type        : 'DELETE', // define the type of HTTP verb we want to use (PUT item to our cart)
+                                url         : 'http://localhost:3000/api/cart:id_customer', // the url where we want to PUT
+                                data        : {}, // our data object
+                                dataType    : 'json', // what type of data do we expect back from the server
+                                encode      : true
+                                success: function (result) {
+                                                            // using the done promise callback
                                 .done(function(data) {
                                 // Success, so clear
-                                $('#btn-default').remove();
+                                $('#btn-delete').remove();
                                 // Show success alert
-                                swal("Success, your cart has been deleted!", "success");
-                                })
+                                swal("Success, this item has been removed", "success");
+                                }) // End .done
                                 .fail(function(data){
                                 // In a fail, we need to look inside the responseJSON object for our
                                 // APIs error message
                                 swal("Oops...", data.responseJSON.data.error, "error");
-                            }); // End fail
-                
-                    }); // End Ajax call
+                                }) // End .fail
 
+                            }; // End success
+                    }); // End Ajax call
                 }); // End btn-default.onclick
             } // end if (answer)
 </script>

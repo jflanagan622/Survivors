@@ -59,7 +59,7 @@ body {
 }
 
 .login-btn {
-  background-color: #ffde00;
+  background-color: #b8b8b9;
   width: 97px;
   height: 30px;
   display: inline-block;
@@ -114,19 +114,19 @@ body {
 
 /* Slides Background Color */
 .slide-1 {
-  background: #d6b6e0;
+  background: #fbad99;
   left: 0;
 }
 .slide-2 {
-  background: #efabd1;
+  background: #a9785c;
   left: 100%
 }
 .slide-3 {
-  background: #7fd2db;
+  background: #9ea6b3;
   left: 200%
 }
 .slide-4 {
-  background: #b9cf4e;
+  background: #b1a494;
   left: 300%;
 }
 .slider {
@@ -137,6 +137,7 @@ body {
   width: 635px;
   padding-left: 100px;
 }
+
 
 /* Slider Inner Slide Effect */
 .slider h2 {
@@ -154,9 +155,9 @@ body {
 }
 
 .slider h4 {
-  font-size: 26px;
+  font-size: 22px;
   font-family: "Oswald";
-  color: rgba(0, 85, 135, 1);
+  color: rgba(51, 51, 51, 0.349);
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1.2;
@@ -167,9 +168,10 @@ body {
 
 .slider > img {
   position: absolute;
-  right: 10%;
-  bottom: 0;
-  height: 100%;
+  right: 5%;
+  top: 10;
+  width: 50%;
+  height: auto;
   opacity: 0;
   -webkit-transform: translateX(500px);
   transform: translateX(500px);

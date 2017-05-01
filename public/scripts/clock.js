@@ -10,8 +10,8 @@ function getTimeRemaining(endtime) {
     'hours': hours,
     'minutes': minutes,
     'seconds': seconds
-  };
-}
+  }; // End return
+} // End function
 
 function initializeClock(id, endtime) {
   var clock = document.getElementById(id);
@@ -30,12 +30,12 @@ function initializeClock(id, endtime) {
 
     if (t.total <= 0) {
       clearInterval(timeinterval);
-    }
-  }
+    } // End if loop
+  } // End updateClock
 
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
-}
+} // End initializeClock
 
 // Sneak in the jQuery document ready function
 // so we don't try to initialize the clock before
@@ -44,6 +44,6 @@ jQuery(document).ready(
     function() {
         var deadline = 'July 7 2017';
         initializeClock('clockdiv', deadline);
-    }
-);
+    } // End function
+); // End jQuery.ready
 

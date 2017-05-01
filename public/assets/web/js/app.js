@@ -21,12 +21,12 @@ function handleNext() {
       .first()
       .attr('checked', true);
 
-  } else {
+  } /* End if currentIndex */ else {
 
     $activeRadio
       .next('input[class*="slide-radio"]')
       .attr('checked', true);
 
-  }
+  } // End else
 
-}
+} // End handleNext

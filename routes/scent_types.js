@@ -18,7 +18,7 @@ exports.createScentType = function(req, res) {
 			if(!err) return false;
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-	    };
+	    }; // End handleError
 	    // handle an error from the connect
 		if(handleError(err)) return;
 		
@@ -31,16 +31,16 @@ exports.createScentType = function(req, res) {
 				// handle an error from the query
 				if(handleError(err)) return;
 				res.status(200).json({result: 'success', data:{ id : result.rows[0].id, label : result.rows[0].label }});	
-			});
+			}); // End client.query
 	  	
-		} else {
+		} /* End if validate */ else {
 			done();
 	    	res.status(400).json({ result: 'error', data:{error: 'label is required'} });
-		}
+		} // End else loop
 		
-	});
+	}); // End pool.connect
 	
-}
+} // End exports.CreateScentType
 
 
 //-------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ exports.readScentTypes = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	};
+    	}; // End handleError
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -68,12 +68,12 @@ exports.readScentTypes = function(req, res) {
 			if(result.rowCount > 0) {
 				var scent_types = result.rows;
 				res.status(200).json({result: 'success', data:{ scent_types : scent_types }});
-			} else {
+			} /* End if rowCount */ else {
 				res.status(200).json({result: 'success', data:{}});
-			}
-		});
-	});
-};
+			} // End else loop
+		}); // End client.query
+	}); // End pool.connect
+}; // End exports.readScentTypes
 
 //---------------------------------------------------------------------------------------
 // Update
@@ -88,7 +88,7 @@ exports.updateScentType = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	};
+    	}; // End handleError
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -97,13 +97,13 @@ exports.updateScentType = function(req, res) {
 		if(req.params.id) {
 			done();
 			res.status(200).json({result: 'success', data:{count : result.rowCount}});
-    	} else {
+    	} /* End if validate */ else {
 	    	done();
 	    	rres.status(400).json({ result: 'error', data:{error: 'id is required'} });
-    	}
+    	} // End else loop
    
-  	});
-};
+  	}); // End pool.connect
+}; // End exports.updateScentType
 
 //---------------------------------------------------------------------------------------
 // Delete
@@ -118,7 +118,7 @@ exports.deleteScentType = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	};
+    	}; // End handleError
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -132,12 +132,12 @@ exports.deleteScentType = function(req, res) {
 				if(handleError(err)) return;
 				done();
 				res.status(200).json({result: 'success', data:{count : result.rowCount}});
-      		});
+      		}); // End client.query
       	
-    	} else {
+    	} /* End if validate */ else {
 	    	done();
 	    	res.status(400).json({ result: 'error', data:{error: 'id is required'} });
-    	}
+    	} // End else loop
    
-  	});
-};
+  	}); // End pool.connect
+}; // End exports.deleteScentType

@@ -1,173 +1,92 @@
-<!---<nav class="navbar">
-			<div class="container">
-				<a class="navbar-brand" href="/">Richwood Scentific</a>
-				<div class="navbar-right">
-					<div class="container minicart"></div>
-				</div>
-			</div>
-		</nav>
-		
-		<div class="container-fluid breadcrumbBox text-center">
-			<ol class="breadcrumb">
-				<li><a href="/">Continue Shopping</a></li>
-                <li class="active"><a href="/cart" >View Cart</a></li>
-				<li><a href="/paymentshippingform">Check Out</a></li>
-			</ol>
-        </div>
-		
-		<div class="container text-center">
-			<div class="col-md-5 col-sm-12">
-				<div class="bigcart"></div>
-				<h1>Your shopping cart</h1>
-				<p>
-					This is a free and <b><a href="http://tutorialzine.com/2014/04/responsive-shopping-cart-layout-twitter-bootstrap-3/" title="Read the article!">responsive shopping cart layout, made by Tutorialzine</a></b>. It looks nice on both desktop and mobile browsers. Try it by resizing your window (or opening it on your smartphone and pc).
-				</p>
-			</div>
-			
-			<div class="col-md-7 col-sm-12 text-left">
-				<ul>
-					<li class="row list-inline columnCaptions">
-						<span>QTY</span>
-						<span>ITEM</span>
-						<span>Price</span>
-					</li>
-					<li class="row">
-                        <span class="quantity">
-                        <input class="form-control" type="number" step="any" id="inputQuantity"></span>
-						<span class="itemName">Birthday Cake</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$49.95</span>
-					</li>
-					<li class="row">
-						<span class="quantity"><input class="form-control" type="number" step="any" id="inputQuantity"></span>
-						<span class="itemName">Party Cups</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$5.00</span>
-					</li>
-					<li class="row">
-						<span class="quantity"><input class="form-control" type="number" step="any" id="inputQuantity"></span>
-						<span class="itemName">Beer kegs</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$919.99</span>				
-					</li>
-					<li class="row">
-						<span class="quantity"><input class="form-control" type="number" step="any" id="inputQuantity"></span>
-						<span class="itemName">Pound of beef</span>
-						<span class="popbtn"><a class="arrow"></a></span>
-						<span class="price">$269.45</span>
-					</li>
-					<li class="row">
-						<span class="quantity"><input class="form-control" type="number" step="any" id="inputQuantity"></span>
-						<span class="itemName">Bullet-proof vest</span>
-						<span class="popbtn"  data-parent="#asd" data-toggle="collapse" data-target="#demo"><a class="arrow"></a></span>	
-						<span class="price">$450.00</span>			
-					</li>
-					<li class="row totals">
-						<span class="itemName">Total:</span>
-						<span class="price">$1694.43</span>
-						<span class="order"> <a class="text-center">ORDER</a></span>
-					</li>
-				</ul>
-			</div>
-		</div>--->
-
-
-
-		<!-- The popover content -->
-
-		<!--<div id="popover" style="display: none">
-			<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="#"><span class="glyphicon glyphicon-remove"></span></a>
-		</div>-->
-		
-		<!-- JavaScript includes -->
-
-      <!--  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/customjs.js"></script>-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-sm-8 col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="../assets/web/images/products/erasers.png" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="../assets/web/images/products/scentedpowders.png" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                        </td>
-                        <td class="col-md-1 text-center"><strong>$4.99</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                        <td class="col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Subtotal<br>Estimated shipping</h5><h3>Total</h3></td>
-                        <td class="text-right"><h5><strong>$24.59<br>$6.94</strong></h5><h3>$31.53</h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                        </button></td>
-                        <td>
-                        <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
-</div>
 
+      <div class="col-md-3 sidebar">
+        <nav class="sidebar-nav">
+
+          <div class="sidebar-header">
+           <!--<button class="nav-toggler nav-toggler-md sidebar-toggler" type="button" data-toggle="collapse" data-target="#nav-toggleable-md">
+              <span class="sr-only">Toggle nav</span>
+            </button>-->
+           <a class="sidebar-brand img-responsive" href="/admin">
+              <span class="icon icon-leaf sidebar-brand-icon"></span>
+            </a>
+          </div> <!-- End class "sidebar header" -->
+
+          <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
+           
+           <!-- Search for products -->
+           <!--<form class="sidebar-form">
+              <input class="form-control" type="text" placeholder="Search...">
+              <button type="submit" class="btn-link">
+                <span class="icon icon-magnifying-glass"></span>
+              </button>
+            </form>
+            <!-- Side Nav Bar Top -->
+            <ul class="nav nav-pills nav-stacked flex-column">
+              <li class="nav-header"><h5 style="text-decoration: underline;">Pages</h5></li>
+                
+             <li class="nav-item">
+                <a class="nav-link " href="shop">Shop Products</a>
+              </li>
+                
+                <li class="nav-item">
+                <a class="nav-link active"href="cart">View Cart</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="checkout">Checkout</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="/">Home Page</a>
+              
+                <li class="nav-item">
+                <a class="nav-link "href="login">Login</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link "href="signup">Signup</a>
+              
+            </ul>
+            
+            <!--<hr class="visible-xs mt-3">
+            <!-- Side Nav Bar Bottom 
+            <ul class="nav nav-pills nav-stacked flex-column">
+              <li class="nav-header">Related Tables</li>
+              <li class="nav-item">
+                <a class="nav-link " href="/addproducttype">Product Types</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "href="/addscenttype">Scent Types</a>
+              </li>
+            </ul>-->
+
+          </div> <!-- End class "collapse nav-toggleable-md" -->
+
+        </nav>
+      </div> <!-- End class "col-md-3 sidebar" -->
+
+        <!-- Top page Bar -->
+        <div class="col-md-9 content">
+            <div class="dashhead">
+                <div class="dashhead-titles">
+                    <h6 class="dashhead-subtitle">Richwood-Scentific</h6>
+                    <h2 class="dashhead-title">Cart</h2>
+                </div>
+            </div> <!-- End class "dashhead" -->
+
+            <!-- Body Box -->
+            <div class="col-md-9 content">
+                <table id="data_table" class="table table-striped table-bordered" cellspacing="0">
+                    <!-- Inject HTML here -->
+                </table>
+            </div>
+            <!-- Body Box -->
+
+        </div> <!-- End class "col-md-9 content" -->
+        
+      </div> <!-- End class "row" -->
+    </div> <!-- End class "container" -->
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/sweetalert.min.js"></script> 
 <script src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/fh-3.1.2/datatables.min.js"></script>
@@ -177,58 +96,69 @@
    
     // "DT_RowId" will be used for row id
     $(document).ready(function() {
-                
         
-          var id_customer = Cookies.get('richwood-scentific' || 'richwood-scentific-temp');
-
-            console.log(id_customer);
+         var id_customer = Cookies.get('richwood-scentific');
         
-      $.ajax({
-        url: "http://localhost:3000/api/cart/{{id}}",
-        dataType: "json",
-        type: "GET",
-        data: {},
-        success: function (result) {
-
-           
-
-            // Did we get any products in the ajax call?
-            if(result.data.cart.length > 0) {
-              
-              // Loop through the array of product records
-              for(var x=0; x<result.data.cart.length;x++) {
-              
-                
+        console.log('COOKIE=' + id_customer )
+        
+        $.ajax({
+        
+            url: 'http://localhost:3000/api/cart/' + id_customer,
+            data: "json",                    
+            type: "GET",
+            data: { },
+         
+            success: function (result) {
+    
+                // vars for DataTable
+                var columns = [];
+                // We iterate through the array of records we get back from the database API call
+                // If you drill down in the console, you will find the array at result.data.products
+                // First, we build the columns array dynamically by examining the first record in the returned set.
+                console.log(result.data);
+                if(result.data.items.length > 0) {
+                    var firstRecord = result.data.items[0];
                   
-                  // Build a string we can use to find each div by name- ex. .slider.slide-x
-                  var classToFind = 'row' + (x+1);
-                  $(classToFind).find('itemName').html(result.data.products[x].product_name);
-                  $(classToFind).find('price').html(result.data.products[x].unit_price);
-                  $(classToFind).find('quantity').html(result.data.cart[x].quantity);
-                  
-
-                  // So we can call add to cart with the product id later
-                  $(classToFind).find('button').attr('id_product', result.data.products[x].id);
-
-                  // Build a string for the images path and add the file name from the database
-                  var imgSrc = "../assets/web/images/products/" + result.data.products[x].product_pic;
-                  $(classToFind).find('img').attr('src', imgSrc);
-              
-                  // Is this a Best Seller? If so, replace the New Product text with Best Seller
-                  if(result.data.products[x].best_seller == true) {
-                    $(classToFind).find('h4').html('Best Seller');
-                  } // End best seller
-              
-               
-              
-              } // End for loop
+                    for(var key in firstRecord) {
+                      // We don't want id visible
+                      if(key == 'id' ) {
+                        columns.push( { "title" : key, "data" : key, "visible": false } );
+                      }/*End if*/ else { 
+                        // Push in the data
+                        columns.push( { "title" : key, "data" : key } );
+                      } // End else
+                    }; // End for loop
+                   // else {
+                   // console.log("does not 42");} //end else loop 
+                //}; // End if loop
+                console.log(result.data.items);
+                // Push in our buttons as a final column
+                columns.push( {"defaultContent": "<button class=\"btn btn-default\"><i class=\"fa fa-arrow-up\"></i></button><button class=\"btn btn-delete\"><i class=\"fa fa-arrow-up\"></i></button>"} )
+                // Draw the table
+                var table = $('#data_table').DataTable( {
+                    "data" : result.data.items,
+                    "columns" : columns,
+                    columnDefs: [
+                      { width: '500px', targets: 0 }
+                    ],
+                    fixedColumns: true
+                });  // End var table
+ 
+                $('#data_table tbody').on( 'click', 'button', function () {
+                    var data = table.row( $(this).parents('tr') ).data();
+                    var buttonClass = $(this).attr("class");
+                    if(buttonClass == "btn btn-default") {
+                      // How would you hook this up?
+                      alert( "Update " + data.id );
+                    } /*End if*/ else {
+                      // And this? What about the "are you sure?"
+                      alert( "Delete " + data.id );
+                    } // End else
+                    
+                }); // End data_table.on('click')
+                    }
+            } // End success
             
-            } // End did we get any products
-
-        } // End success function
-    }); // End Ajax call.
-    
-    
-
+        }); // End ajax
     }); //End document.ready
 </script>

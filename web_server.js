@@ -4,7 +4,7 @@
 var express = require('express');
 var app = express();
 
-// Set the port to listen on. 3001 since it's the web server
+// Set the port to listen on. 80 since it's the web server
 // NOTE: su usually required for ports under 1024
 app.set('port', process.env.PORT || 3001);
 
@@ -29,29 +29,35 @@ app.disable('etag');
 //-----------------------------------------
 // Startup the server
 app.listen(app.get('port'), function(){
-	console.log( 'The Web Server is running. Open a browser and navigate to: http://localhost:/3001/');
+	console.log( 'The Web Server is running. Open a browser and navigate to: http://localhost:3001/');
 });
 
-
 //-----------------------------------------
-// Page routes
-//
-
+// Cart routes 
+//-----------------------------------------
 // Default page
 app.get('/', function(req,res) {
 	res.render('home');
 });
-//app.get('/pretty', function(req,res) {
-	// Send the construction page
-	//res.render('homepretty');
-//});
 
-// Construction
-app.get('/construction', function(req,res) {
-	// Send the construction page
-	res.render('construction');
+// Shop Page
+app.get("/shop", function (req, res) {
+	res.render('shop', {layout: 'cart'});
 });
 
+// Cart Page
+app.get("/cart", function (req, res) {
+	res.render('cart', {layout: 'cart'});
+});
+
+// Checkout Page
+app.get("/checkout", function (req, res) {
+	res.render('checkout', {layout: 'cart'});
+});
+
+//-----------------------------------------
+// Customer routes
+//-----------------------------------------
 // Stub of signup page
 app.get("/signup", function (req, res) {
 	// Send the login page
@@ -64,42 +70,28 @@ app.get("/login", function (req, res) {
 	res.render('login');
 });
 
-// Cart Page
-app.get("/cart", function (req, res) {
-	res.render('cart', {layout: 'adminmain'});
+// Page to update Customers in the Database
+app.get("/updatecustomer/:id", function (req, res) {
+	// Send the Update Customer page and pass in the :id 
+	// and the URL to return to after saving in the update page
+    res.render('updatecustomer', {layout: 'adminmain', id: req.params.id, return_to: req.params.return_to});
 });
-
-// Cart Page
-app.get("/shop", function (req, res) {
-	res.render('shop', {layout: 'adminmain'});
-});
-
-// Checkout Page
-app.get("/checkout", function (req, res) {
-	res.render('checkout');
-});
-
-// updateproduct Page
-app.get("/updateproduct", function (req, res) {
-	res.render('updateproduct', {layout: 'adminmain'});
-});
-
-// viewdata
-app.get("/viewdata", function (req, res) {
-	res.render('viewdata', {layout: 'adminmain'});
-});
-
 
 //-----------------------------------------
-// Dashboard and Admin pages
+// Admin and Dashboard pages
 //-----------------------------------------
+// Send the Admin page
 app.get("/admin", function (req, res) {
-	// Send the Admin page
 	// Note we are also changing from the main layout
 	// to the Admin one; not just the body
     res.render('adminbody', {layout: 'adminmain', inventory_cost : "$0.00"});
 });
 
+// Generic Page to view Database tables
+app.get("/viewdata", function (req, res) {
+	// Send the Add Product page
+    res.render('viewdata', {layout: 'adminmain'});
+});
 
 //-----------------------------------------
 // Product pages
@@ -117,6 +109,12 @@ app.get("/updateproduct/:id", function (req, res) {
     res.render('updateproduct', {layout: 'adminmain', id: req.params.id, return_to: req.params.return_to});
 });
 
+// Generic Page to view Database tables
+app.get("/viewdata", function (req, res) {
+	// Send the Add Product page
+    res.render('viewdata', {layout: 'adminmain'});
+});
+
 //-----------------------------------------
 // Product Type pages
 //-----------------------------------------
@@ -124,6 +122,12 @@ app.get("/updateproduct/:id", function (req, res) {
 app.get("/addproducttype", function (req, res) {
 	// Send the Add Product page
     res.render('addproducttype', {layout: 'adminmain'});
+});
+
+// Generic Page to view Database tables
+app.get("/viewdata", function (req, res) {
+	// Send the Add Product page
+    res.render('viewdata', {layout: 'adminmain'});
 });
 
 //-----------------------------------------
@@ -135,18 +139,25 @@ app.get("/addscenttype", function (req, res) {
     res.render('addscenttype', {layout: 'adminmain'});
 });
 
-
-//-----------------------------------------
-// Utility pages
-//-----------------------------------------
 // Generic Page to view Database tables
-app.get("/viewdata", function (req, res) {
+app.get("/viewScentTypes", function (req, res) {
 	// Send the Add Product page
-    res.render('viewdata', {layout: 'adminmain'});
+    res.render('viewscenttypes', {layout: 'adminmain'});
 });
 
+//-----------------------------------------
+// Extra and Utility pages
+//-----------------------------------------
+app.get('/pretty', function(req,res) {
+	// Send the construction page
+	res.render('homepretty');
+});
 
-
+// Construction
+app.get('/construction', function(req,res) {
+	// Send the construction page
+	res.render('construction');
+});
 
 //-----------------------------------------
 // Finally If no routes match, send the 404 page
