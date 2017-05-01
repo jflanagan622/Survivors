@@ -24,7 +24,6 @@
                 <span class="icon icon-magnifying-glass"></span>
               </button>
             </form>
-
             <!-- Side Nav Bar Top -->
             <ul class="nav nav-pills nav-stacked flex-column">
               <li class="nav-header"><h5 style="text-decoration: underline;">Pages</h5></li>
@@ -51,11 +50,9 @@
             </ul>
             
             <!--<hr class="visible-xs mt-3">
-
             <!-- Side Nav Bar Bottom 
             <ul class="nav nav-pills nav-stacked flex-column">
               <li class="nav-header">Related Tables</li>
-
               <li class="nav-item">
                 <a class="nav-link " href="/addproducttype">Product Types</a>
               </li>
@@ -99,27 +96,27 @@
    
     // "DT_RowId" will be used for row id
     $(document).ready(function() {
-
-         var id_customer = Cookies.get('richwood-scentific' || 'richwood-scentific-temp');
-        // 4-28-17 after testing a hardcoded id_customer from the cart table with nothin in the data: curly brackets on line 109 we found that we could render a complet correct cart page "job done" but just for that customer record. still progress!! we then found that we could us the code as is on line 106 and this would work to pull the id_customer from our cookies on line 103 and look for that id_customer in cart table however we still have an issue as there is no checking if said customer ever put an item in the cart, we need to account for this but not a show stopper by simply clicking on a few "buys" on the home page befor going to cart page we ensure we have an id_customer with items in the cart table. also we are now having to try diffrent itterations of what to put in the data: curly brackets on line 109 to try to build the data like it did when it was hard coded and we have tired A LOT of itteration twice but still great job on the progress everyone -Brent
+        
+         var id_customer = Cookies.get('richwood-scentific');
+        
+        console.log('COOKIE=' + id_customer )
+        
         $.ajax({
-            url: "http://localhost:3000/api/cart/{{id}}", 
-            dataType: "json",            
+        
+            url: 'http://localhost:3000/api/cart/' + id_customer,
+            data: "json",                    
             type: "GET",
-            data: {id_customer : id_customer},
+            data: { },
          
             success: function (result) {
     
                 // vars for DataTable
                 var columns = [];
-
                 // We iterate through the array of records we get back from the database API call
                 // If you drill down in the console, you will find the array at result.data.products
-
                 // First, we build the columns array dynamically by examining the first record in the returned set.
                 console.log(result.data);
                 if(result.data.items.length > 0) {
-
                     var firstRecord = result.data.items[0];
                   
                     for(var key in firstRecord) {
@@ -137,7 +134,6 @@
                 console.log(result.data.items);
                 // Push in our buttons as a final column
                 columns.push( {"defaultContent": "<button class=\"btn btn-default\"><i class=\"fa fa-arrow-up\"></i></button><button class=\"btn btn-delete\"><i class=\"fa fa-arrow-up\"></i></button>"} )
-
                 // Draw the table
                 var table = $('#data_table').DataTable( {
                     "data" : result.data.items,
@@ -164,6 +160,5 @@
             } // End success
             
         }); // End ajax
-
     }); //End document.ready
 </script>
