@@ -63,7 +63,7 @@ module.exports = app;
 
 //-----------------------------------------
 // API routes
-//-----------------------------------------
+//
 
 //-----------------------------------------
 // Customers
@@ -111,6 +111,8 @@ app.delete('/api/cart/:id', cart.deleteCartLine);
 app.get('/api/cart-version/', cart.readCartVersion);
 
 //-----------------------------------------
+
+
 
 //-----------------------------------------
 // Products
@@ -161,8 +163,6 @@ app.put('/api/product_type', product_types.updateProductType);
 
 // Delete
 app.delete('/api/product_type', product_types.deleteProductType);
-
-//-----------------------------------------
 
 //-----------------------------------------
 // Scent Types
