@@ -18,7 +18,7 @@ exports.createProductType = function(req, res) {
 			if(!err) return false;
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-	    }; // End handleError
+	    };
 	    // handle an error from the connect
 		if(handleError(err)) return;
 		
@@ -31,16 +31,16 @@ exports.createProductType = function(req, res) {
 				// handle an error from the query
 				if(handleError(err)) return;
 				res.status(200).json({result: 'success', data:{ id : result.rows[0].id, label : result.rows[0].label }});	
-			}); // End client.query
+			});
 	  	
-		} /* End if validate */ else {
+		} else {
 			done();
 	    	res.status(400).json({ result: 'error', data:{error: 'label is required'} });
-		} // End else loop
+		}
 		
-	}); // End pool.connect
+	});
 	
-} // End exports.createProductType
+}
 
 
 //-------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ exports.readProductTypes = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -68,12 +68,12 @@ exports.readProductTypes = function(req, res) {
 			if(result.rowCount > 0) {
 				var product_types = result.rows;
 				res.status(200).json({result: 'success', data:{ product_types : product_types }});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({result: 'success', data:{}});
-			} // End else loop
-		}); // End client.query
-	}); // End pool.connect
-}; // End exports.readProductTypes
+			}
+		});
+	});
+};
 
 //---------------------------------------------------------------------------------------
 // Update
@@ -88,7 +88,7 @@ exports.updateProductType = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -97,13 +97,13 @@ exports.updateProductType = function(req, res) {
 		if(req.params.id) {
 			done();
 			res.status(200).json({result: 'success', data:{count : result.rowCount}});
-    	} /* End if validate */ else {
+    	} else {
 	    	done();
 	    	rres.status(400).json({ result: 'error', data:{error: 'id is required'} });
-    	} // End else loop
+    	}
    
-  	}); // End pool.connect
-}; // End exports.updateProductType
+  	});
+};
 
 //---------------------------------------------------------------------------------------
 // Delete
@@ -118,7 +118,7 @@ exports.deleteProductType = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -132,12 +132,12 @@ exports.deleteProductType = function(req, res) {
 				if(handleError(err)) return;
 				done();
 				res.status(200).json({result: 'success', data:{count : result.rowCount}});
-      		}); // End client.query
+      		});
       	
-    	} /* End if validate */ else {
+    	} else {
 	    	done();
 	    	res.status(400).json({ result: 'error', data:{error: 'id is required'} });
-    	} // End else loop
+    	}
    
-  	}); // End pool.connect
-}; // End exports.deleteProductType
+  	});
+};

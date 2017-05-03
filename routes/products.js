@@ -17,7 +17,7 @@ exports.createProduct = function(req, res) {
 			if(!err) return false;
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-	    }; // End handleError
+	    };
 	    // handle an error from the connect
 		if(handleError(err)) return;
 		
@@ -35,16 +35,16 @@ exports.createProduct = function(req, res) {
 				// handle an error from the query
 				if(handleError(err)) return;
 				res.status(200).json({result: 'success', data:{ id : result.rows[0].id, product_name : result.rows[0].product_name }});	
-			}); // End client.query
+			});
 	  	
-		} /* End if validate */ else {
+		} else {
 			done();
 	    	res.status(400).json({ result: 'error', data:{error: 'product_name is required'} });
-		} // End else loop
+		}
 		
-	}); // End pool.connect
+	});
 	
-} // End exports.createProduct
+}
 
 
 //-------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ exports.readProducts = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -72,12 +72,12 @@ exports.readProducts = function(req, res) {
 			if(result.rowCount > 0) {
 				var products = result.rows;
 				res.status(200).json({result: 'success', data:{ products : products }});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({result: 'success', data:{}});
-			} // End else loop
-		}); // End client.query
-	}); // End pool.connect
-}; // End export.readProducts
+			}
+		});
+	});
+};
 
 //-------------------------------------------------------------------------------------------
 // Get all Best Selling Products
@@ -93,7 +93,7 @@ exports.readBestSellers = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -104,12 +104,12 @@ exports.readBestSellers = function(req, res) {
 			if(result.rowCount > 0) {
 				var products = result.rows;
 				res.status(200).json({result: 'success', data:{ products : products }});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({result: 'success', data:{}});
-			} // End else loop
-		}); // End client.query
-	}); // End pool.connect
-}; // End exports.readBestSellers
+			}
+		});
+	});
+};
 
 //-------------------------------------------------------------------------------------------
 // Get all Best Selling Products stripped for a table
@@ -125,7 +125,7 @@ exports.readBestSellersMin = function(req, res) {
 			console.log(err);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -136,12 +136,14 @@ exports.readBestSellersMin = function(req, res) {
 			if(result.rowCount > 0) {
 				var data = result.rows;
 				res.status(200).json({data});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({data});
-			} // End else loop
-		}); // End client.query
-	}); // End pool.connect
-}; // End exports.readBestSellersMin
+			}
+		});
+	});
+};
+
+
 
 //-------------------------------------------------------------------------------------------
 // Get specific Product
@@ -156,7 +158,7 @@ exports.readProduct = function(req, res) {
 			done(client);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -168,13 +170,13 @@ exports.readProduct = function(req, res) {
 			if(result.rowCount > 0) {
 				var products = result.rows;
 				res.status(200).json({result: 'success', data:{ products : products }});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({result: 'success', data:{}});
-			} // End else loop
-		}); //End client.query
+			}
+		}); 
 
-	}); // End pool.connect
-}; // End exports.readProduct
+	});
+};
 
 //-------------------------------------------------------------------------------------------
 // Get Product with LIKE
@@ -189,7 +191,7 @@ exports.searchProduct = function(req, res) {
 			done(client);
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
     	
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -202,13 +204,13 @@ exports.searchProduct = function(req, res) {
 			if(result.rowCount > 0) {
 				var products = result.rows;
 				res.status(200).json({result: 'success', data:{ products : products }});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({result: 'success', data:{}});
-			} // End else loop
-		}); // End client.query
+			}
+		}); 
 
-	}); // End pool.connect
-}; // End exports.searchProduct
+	});
+};
 
 
 //---------------------------------------------------------------------------------------
@@ -242,42 +244,42 @@ exports.updateProduct = function(req, res) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', product_name = $' + argumentCount; 
 						valueArray.push(req.body.product_name);
-					} // End product_name
+					}
 					if(req.body.id_type) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', id_type = $' + argumentCount; 
 						valueArray.push(req.body.id_type);
-					} // End id_type
+					}
 					if(req.body.id_scent_type) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', id_scent_type = $' + argumentCount; 
 						valueArray.push(req.body.id_scent_type);
-					} // End id_scent_type
+					}
 					if(req.body.qty_on_hand) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', qty_on_hand = $' + argumentCount; 
 						valueArray.push(req.body.qty_on_hand);
-					} // End qty_on_hand
+					}
 					if(req.body.size) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', size = $' + argumentCount; 
 						valueArray.push(req.body.size);
-					} // end Size
+					}
 					if(req.body.unit_price) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', unit_price = $' + argumentCount; 
 						valueArray.push(req.body.unit_price);
-					} // End unit_price
+					}
 					if(req.body.cost) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', cost = $' + argumentCount; 
 						valueArray.push(req.body.cost);
-					} // End cost
+					}
 					if(req.body.in_store) {
 						argumentCount = argumentCount + 1;
 						queryText = queryText + ', in_store = $' + argumentCount; 
 						valueArray.push(req.body.in_store);
-					} // End in_store
+					}
 
 					queryText = queryText + ' WHERE id = $1 RETURNING id;';
 		
@@ -292,23 +294,23 @@ exports.updateProduct = function(req, res) {
 						done();
 						if(result.rowCount > 0) {
 							res.status(200).json({result: 'success', data:{ id : result.rows[0].id }});
-						} /* End if rowCount */ else {
+						} else {
 							res.status(400).json({ error: 'id not found' });	
-						} // End else loop
-	      		}); // End client.query
+						}
+	      		});
       		
-      		} /* if(req.body.id) */  else {
+      		} else {
 	      		done();
 	      		res.status(400).json({ result:'error', data:{ error:'the product id is required inside the body object'} });
-    		} // End else loop
+    		}
       	
-    	} /* End if validate */ else {
+    	} else {
 	    	done();
 	    	res.status(400).json({ result:'error', data:{ error:'Missing body object' } });
-    	} // End else loop
+    	}
    
-  	}); // End pool.connect
-}; // End exports.updateProduct
+  	});
+};
 
 //---------------------------------------------------------------------------------------
 // Delete
@@ -323,7 +325,7 @@ exports.deleteProduct = function(req, res) {
 			done();
 			res.status(500).json({ result:'error', data:{ error:err } });
 			return true;
-    	}; // End handleError
+    	};
 
     	// handle an error from the connect
 		if(handleError(err)) return;
@@ -337,15 +339,15 @@ exports.deleteProduct = function(req, res) {
 				if(handleError(err)) return;
 				done();
 				res.status(200).json({result: 'success', data:{count : result.rowCount}});
-      		}); // End client.query
+      		});
       	
-    	} /* End if validate */ else {
+    	} else {
 	    	done();
 	    	res.status(400).json({ result: 'error', data:{error: 'id is required'} });
-    	} // End else loop
+    	}
    
-  	}); // End pool.connect
-}; // Exports.deleteProduct
+  	});
+};
 
 //-------------------------------------------------------------------------------------------
 // Get dollar amount of our on-hand inventory
@@ -372,9 +374,11 @@ exports.totalCostofOnHand = function(req, res) {
 			if(result.rowCount > 0) {
 				var products = result.rows;
 				res.status(200).json({result: 'success', data:{ total_cost : result.rows[0].total_cost }});
-			} /* End if rowCount */ else {
+			} else {
 				res.status(200).json({result: 'success', data:{ total_cost : 0.00 }});
-			} // End else loop
-		}); // End client.query
-	}); // End pool.connect
-}; // End exports.totalCostofOnHand
+			}
+		});
+	});
+};
+
+
