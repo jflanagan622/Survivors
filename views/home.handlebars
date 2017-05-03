@@ -42,7 +42,7 @@
 
       <!-- Slider #1 -->
       <div class="slider slide-1">
-        <img src="" alt="">
+        <img src="../assets/web/images/products/erasers.png" alt="">
         <div class="slider-content">
           <h4>-</h4>
           <h2>Geddes Mash Ups Scented Kneaded Erasers</h2>
@@ -55,7 +55,7 @@
 
       <!-- Slider #2 -->
       <div class="slider slide-2">
-        <img src="" alt="">
+        <img src="../assets/web/images/model-2.png" alt="">
         <div class="slider-content">
           <h4>New Product</h4>
           <h2>Denim Longline T-Shirt Dress With Split</h2>
@@ -68,7 +68,7 @@
 
       <!-- Slider #3 -->
       <div class="slider slide-3">
-        <img src="" alt="">
+        <img src="../assets/web/images/model-3.png" alt="">
         <div class="slider-content">
           <h4>New Product</h4>
           <h2>Denim Longline T-Shirt Dress With Split</h2>
@@ -81,7 +81,7 @@
 
       <!-- Slider #4 -->
       <div class="slider slide-4">
-        <img src="" alt="" max-width=300px height=auto>
+        <img src="../assets/web/images/model-4.png" alt="" max-width=300px height=auto>
         <div class="slider-content">
           <h4>New Product</h4>
           <h2>Denim Longline T-Shirt Dress With Split</h2>
@@ -115,18 +115,18 @@ $( document ).ready(function() {
   } // End else
 
 
-//  $.ajax({
-//      url: "http://localhost:3000/api/product_types",
-//      dataType: "json",
-//      type: "GET",
-//      data: {},
-//      success: function (result) {
-//          // Menu bar
-//          $('#prod1').text(result.data.product_types[0].label);
-//          $('#prod2').text(result.data.product_types[1].label);
-//          $('#prod3').text(result.data.product_types[2].label);
-//      }
-//  });
+  $.ajax({
+      url: "http://localhost:3000/api/product_types",
+      dataType: "json",
+      type: "GET",
+      data: {},
+      success: function (result) {
+          // Menu bar
+          $('#prod1').text(result.data.product_types[0].label);
+          $('#prod2').text(result.data.product_types[1].label);
+          $('#prod3').text(result.data.product_types[2].label);
+      }
+  });
 
   $.ajax({
         url: "http://localhost:3000/api/products",

@@ -29,7 +29,7 @@
 </center>
 
 
-<br />
+<br></br>
 
 <center>
     <div>
@@ -39,15 +39,18 @@
     </div>
 </center>
 
-<br />
+<br></br>
 
 <center>
-<a href="/admin"><img src="../assets/web/images/infin.png" alt=""style="width:40px;height:40px;"hspace="20"></a>
+<a href="/admin"><img src="../assets/web/images/infin.png" alt=""style="width:40px;height:40px;"hspace="20">
+              </img>
+          </a>
 </center>
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
 <script src="../assets/web/js/js.cookie.js"></script>
+
 <script type="text/javascript">
 
 $( document ).ready(function() {
@@ -78,18 +81,18 @@ $( document ).ready(function() {
                 console.log(result);
                 
                 window.location.href = "/";
-            }, // End success
+            },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 // A failure will usually mean an invalid login
                 // TODO: Properly test if it is a 403 (already exists) or something else
                 //alert("Hello! I am an alert box!");
                 window.location.href = "/login";
-            }  //End error
-        }); End ajax call
+            }  
+        });
 
-    }); //End form
+    });
        
-}); // End document.ready
+});
     
     
 

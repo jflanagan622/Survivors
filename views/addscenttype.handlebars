@@ -128,11 +128,16 @@
 
 
   <script src="../assets/js/jquery.min.js"></script>
-  <script src="../assets/js/sweetalert.min.js"></script> 
-
+  <script src="../assets/js/sweetalert.min.js"></script> // test code cookies
+<script src="../assets/web/js/js.cookie.js"></script>
   <script type="text/javascript">
 
     $( document ).ready(function() {
+        
+       var good = Cookies.get('richwood-scentific' || 'richwood-scentific-temp');
+        
+        console.log(good);
+ 
 
         // process the form
         $('form').submit(function(event) {
